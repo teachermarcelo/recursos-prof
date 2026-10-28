@@ -96,6 +96,6 @@ async function renderDynamicLesson(){
   document.getElementById('dynamic-export-copy').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(copy,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=lessonId+'-my-copy.json';a.click();URL.revokeObjectURL(url)});
 }
 
-if(lessonId!=='A2-UNIT01-LESSON001') renderDynamicLesson(); else init();
+renderDynamicLesson();
 })();
 </script></body></html>
