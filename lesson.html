@@ -33,6 +33,17 @@
 (function(){
 const params=new URLSearchParams(location.search);const lessonId=params.get('lesson')||'A2-UNIT01-LESSON001';const sections=[...document.querySelectorAll('[data-section]')];const nav=[...document.querySelectorAll('[data-tab]')];const cfg=window.FI_CONFIG||{};const canSupabase=!!(window.supabase&&cfg.supabaseUrl&&cfg.supabaseAnonKey);let sb=null,user=null; if(canSupabase)sb=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);
 const key='fi-teacher-copy:'+lessonId;let original={lessonId:lessonId,title:'Travel: At the Airport',level:'A2',duration:45};let savedCopy=null;
+if(lessonId!=='A2-UNIT01-LESSON001'){
+  document.getElementById('lesson-title').textContent=lessonId.replace(/-/g,' ');
+  document.getElementById('lesson-description').textContent='Esta rota individual está criada, mas o conteúdo pedagógico específico desta aula ainda precisa ser produzido e aprovado.';
+  document.getElementById('level-stat').textContent=lessonId.split('-')[0]+' · CURRICULUM ROUTE';
+  document.getElementById('hero-topic').textContent=lessonId.split('-')[0]+' CURRICULUM';
+  document.getElementById('hero-subtitle').textContent='Lesson content in production';
+  const overview=document.querySelector('[data-section="overview"]');
+  overview.innerHTML='<span class="tag">LESSON PAGE · CONTENT STATUS</span><h2>'+lessonId.replace(/-/g,' ')+'</h2><div class="notice">A página individual está criada, mas esta aula ainda não tem conteúdo próprio aprovado. Para evitar apresentar materiais A2 como se fossem de outro nível, os laboratórios e atividades ficam indisponíveis até a produção específica.</div><div class="callout"><b>Próxima etapa de produção</b><p>Definir objetivo comunicativo e descritores CEFR; criar conteúdo de vocabulário, speaking, reading, listening e grammar quando aplicáveis; alinhar worksheets, slides, avaliação e gabarito; concluir QA antes da publicação.</p></div><a class="btn" href="levels.html">Voltar ao catálogo de níveis</a>';
+  nav.forEach(b=>{if(!['overview','edit'].includes(b.dataset.tab)){b.disabled=true;b.title='Conteúdo específico ainda não publicado';}});
+}
+
 function setTab(id){sections.forEach(s=>s.classList.toggle('active',s.dataset.section===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.tab===id));if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);if(innerWidth<900)document.querySelector('.panel').scrollIntoView({behavior:'smooth',block:'start'});}
 nav.forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.go)));if(location.hash&&sections.some(s=>s.dataset.section===location.hash.slice(1)))setTab(location.hash.slice(1));
 function feedback(id,ok,good,bad){const e=document.getElementById(id);e.textContent=ok?good:bad;e.className='feedback '+(ok?'good':'bad')}
