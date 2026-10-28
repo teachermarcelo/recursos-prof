@@ -3,6 +3,7 @@
 Landing page pública, aula demonstrativa gratuita A2 e estrutura inicial para a plataforma FLUENT IMMERSION.
 
 ## Páginas
+- `free-lesson.html`: aula gratuita completa e interativa A2 — Travel: At the Airport, com vocabulário, diálogo, leitura, speaking e quiz de 8 questões.
 - `index.html`: landing page, apresentação do kit e aula interativa gratuita sem exigir login.
 - `levels.html`: catálogo introdutório dos níveis A0–C2.
 - `login.html`: tela de login, criação de conta e recuperação de senha preparada para Supabase Auth.
